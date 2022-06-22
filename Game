@@ -1,1 +1,53 @@
-print("Hello World")
+import random
+
+# Starts game from ranomdized word
+def game(let):
+    let="OK"
+    previous_guess, chances, word, word_length = [], 5, len(let)*"_", len(let)
+    
+    # While loop
+    while True:
+        guess = input(f"Vänligen välj en bokstav att gissa på.\nOrdet är {word_length} bokstäver långt.")
+      
+        if guess.upper() in previous_guess:
+            print(f"Du har redan gissat på: ({guess.upper()}).\nVänligen prova en annan bokstav.\n")
+        elif len(guess) != 1 or not guess.isalpha():
+            print("Fel gissat. Används endast en bokstav.\n")
+        elif guess.upper() in let:
+            for i in range(len(let)):
+                if let[i] == guess.upper():
+                    word += guess.upper()
+                else:
+                    word += word[i]
+            word = word[len(word)//2:]
+
+        else:
+            chances -= 1
+
+        if not chances:
+            print(f"Inga fler chanser - Game over!\nOrdet var: {let}.\nDina tidigare gissningar {previous_guess}.")
+            break
+        
+        if "_" not in word:
+            print(f"Grattis! Du vann! Ordet var '{let}' och du har {chances} chanser kvar.")
+            break
+         
+        if guess.upper() not in previous_guess and len(guess) == 1 and guess.isalpha():   
+            previous_guess.append(guess.upper())
+        
+        print(f"Ordet: {word}\nDu har *{chances}* chanser kvar.\nTidigare gissningar {previous_guess}.\n")
+        
+# Ranomizing a word in a string.    
+def initialize():
+    words = 'Skönlitteratur är en samlingsterm för berättelser och andra texter skrivna med konstnärliga mål. Innehållet kan vara helt fiktivt eller bygga på verkliga händelser. Skönlitterära verk kontrasteras mot facklitteratur och är en av de populäraste kulturformerna. Formen är vanligtvis prosa, men även lyrik, dramatik och essäistik ingår i skönlitteratur.\
+    Det engelska begreppet "fiction" används dels i samma betydelse som svenskans "fiktion", men är också en strikt litteraturvetenskaplig term, och innebär som sådan motsatsen till "non-fiction", "facklitteratur".\
+    I svenska bibliotek klassificeras skönlitteratur under bibliotekssignum H. I det internationellt mest spridda biblioteksklassificeringssystemet, Dewey, sorteras skönlitteratur in under signum 800.'   
+    w = words.split(" ")
+    w = [i.strip(",!.?""") for i in w if i.isalpha()]
+    
+    letter = w[random.randint(0,len(w))]
+    game(letter.upper())
+
+# Starts hangman
+if __name__ == '__main__':
+    initialize()
