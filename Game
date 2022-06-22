@@ -2,7 +2,6 @@ import random
 
 # Starts game from ranomdized word
 def game(let):
-    let="OK"
     previous_guess, chances, word, word_length = [], 5, len(let)*"_", len(let)
     
     # While loop
