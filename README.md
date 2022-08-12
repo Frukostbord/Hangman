@@ -1,5 +1,8 @@
 # Hangman
 
-## Simple hangman in Swedish.
+### File type
+.py
 
-Written in Python
+### Instructions
+Start the file and you´ll be given choices in the CLI what you can do. The game is in Swedish, so "åäö" are in included.
+
